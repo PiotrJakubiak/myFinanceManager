@@ -3,16 +3,28 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { TransactionListComponent } from './transaction-list/transaction-list.component';
+import {HttpClientModule} from '@angular/common/http';
+import {TransactionService} from './transaction.service';
+import { TransactionFormComponent } from './transaction-form/transaction-form.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CustomCurrencyPipe } from './custom-currency.pipe';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TransactionListComponent,
+    TransactionFormComponent,
+    CustomCurrencyPipe,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [TransactionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

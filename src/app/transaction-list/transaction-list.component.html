@@ -1,0 +1,20 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <th>Name</th>
+      <th>Data</th>
+      <th>Type</th>
+      <th>Kind</th>
+      <th>Amount</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of transactions">
+        <td>{{ transaction.name }}</td>
+        <td>{{ transaction.date | date: 'dd-MM-y' }}</td>
+        <td>{{ transaction.type }}</td>
+        <td>{{ transaction.kind }}</td>
+        <td>{{ transaction.amount | customCurrency }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
