@@ -9,6 +9,7 @@ import {TransactionService} from './transaction.service';
 import { TransactionFormComponent } from './transaction-form/transaction-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CustomCurrencyPipe } from './custom-currency.pipe';
+import { TransactionForm2Component } from './transaction-form2/transaction-form2.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { CustomCurrencyPipe } from './custom-currency.pipe';
     TransactionListComponent,
     TransactionFormComponent,
     CustomCurrencyPipe,
+    TransactionForm2Component,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,24 @@
+<form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+
+  <label>Name:
+  <input type="text" formControlName="name" />
+  </label>
+
+  <label>Type:
+    <input type="text" formControlName="type" />
+  </label>
+
+  <label>Kind:
+    <input type="text" formControlName="kind" />
+  </label>
+
+  <label>Amount:
+    <input type="text" formControlName="amount" />
+  </label>
+
+  <button type="submit" [disabled]="!transactionForm.valid">Submit</button>
+
+  <p>
+    Form Status: {{ transactionForm.status }}
+  </p>
+</form>
