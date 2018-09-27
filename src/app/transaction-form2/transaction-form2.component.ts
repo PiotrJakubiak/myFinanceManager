@@ -10,17 +10,36 @@ export class TransactionForm2Component implements OnInit {
 
   constructor(private formBuilder: FormBuilder) { }
 
-  transactionForm = this.formBuilder.group({
-    name: ['', Validators.required],
-    type: [''],
-    kind: [''],
-    amount: ['']
-  });
+  public transactionForm: FormGroup;
 
   ngOnInit() {
+
+    this.transactionForm = this.formBuilder.group(
+      {
+        name: ['', Validators.required],
+        type: [''],
+        kind: [''],
+        amount: ['']
+      });
+
+     this.listenerFormControlValueChanged();
+
   }
 
   onSubmit() {
     console.log(this.transactionForm.value);
+  }
+
+  listenerFormControlValueChanged() {
+    this.transactionForm.get('type').valueChanges.subscribe(
+      (type: string) => {
+          console.log(type);
+         if (type === 'wydatek') {
+           this.transactionForm.get('kind').setValidators([Validators.required]);
+         } else {
+           this.transactionForm.get('kind').clearValidators();
+         }
+      }
+    );
   }
 }

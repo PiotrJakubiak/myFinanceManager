@@ -1,20 +1,24 @@
 <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
 
-  <label>Name:
-  <input type="text" formControlName="name" />
-  </label>
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input id="name" class="form-control" type="text" formControlName="name" />
+  </div>
 
-  <label>Type:
-    <input type="text" formControlName="type" />
-  </label>
+  <div class="form-group">
+    <label for="type">Type:</label>
+    <input id="type" class="form-control" type="text" formControlName="type" />
+  </div>
 
-  <label>Kind:
-    <input type="text" formControlName="kind" />
-  </label>
+  <div class="form-group">
+    <label>Kind:</label>
+      <input type="text" class="form-control" formControlName="kind" />
+  </div>
 
-  <label>Amount:
-    <input type="text" formControlName="amount" />
-  </label>
+  <div class="form-group">
+    <label>Amount:</label>
+      <input type="text" class="form-control" formControlName="amount" />
+  </div>
 
   <button type="submit" [disabled]="!transactionForm.valid">Submit</button>
 
