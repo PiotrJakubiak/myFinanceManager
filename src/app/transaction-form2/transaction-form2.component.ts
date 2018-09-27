@@ -10,7 +10,7 @@ export class TransactionForm2Component implements OnInit {
 
   constructor(private formBuilder: FormBuilder) { }
 
-  public transactionForm: FormGroup;
+  transactionForm;
 
   ngOnInit() {
 
@@ -31,14 +31,16 @@ export class TransactionForm2Component implements OnInit {
   }
 
   listenerFormControlValueChanged() {
-    this.transactionForm.get('type').valueChanges.subscribe(
+    this.transactionForm.get('type').valueChanges.subscribe
+    (
       (type: string) => {
-          console.log(type);
+         console.log(type);
          if (type === 'wydatek') {
            this.transactionForm.get('kind').setValidators([Validators.required]);
          } else {
            this.transactionForm.get('kind').clearValidators();
          }
+        this.transactionForm.get('kind').updateValueAndValidity();
       }
     );
   }
