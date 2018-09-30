@@ -10,6 +10,8 @@ import { TransactionFormComponent } from './transaction-form/transaction-form.co
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CustomCurrencyPipe } from './custom-currency.pipe';
 import { TransactionForm2Component } from './transaction-form2/transaction-form2.component';
+import { ErrorMessageComponent } from './error-message/error-message.component';
+import {ValidationService} from './validation.service';
 
 
 @NgModule({
@@ -19,6 +21,7 @@ import { TransactionForm2Component } from './transaction-form2/transaction-form2
     TransactionFormComponent,
     CustomCurrencyPipe,
     TransactionForm2Component,
+    ErrorMessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,7 @@ import { TransactionForm2Component } from './transaction-form2/transaction-form2
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [TransactionService],
+  providers: [TransactionService, ValidationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
