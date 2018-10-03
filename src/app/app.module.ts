@@ -12,6 +12,8 @@ import { CustomCurrencyPipe } from './custom-currency.pipe';
 import { TransactionForm2Component } from './transaction-form2/transaction-form2.component';
 import { ErrorMessageComponent } from './error-message/error-message.component';
 import {ValidationService} from './validation.service';
+import {ChartsModule} from 'ng2-charts';
+import { BalanceAccountChartComponent } from './balance-account-chart/balance-account-chart.component';
 
 
 @NgModule({
@@ -22,12 +24,14 @@ import {ValidationService} from './validation.service';
     CustomCurrencyPipe,
     TransactionForm2Component,
     ErrorMessageComponent,
+    BalanceAccountChartComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [TransactionService, ValidationService],
   bootstrap: [AppComponent]

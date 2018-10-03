@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import {environment} from "../../environments/environment";
+import {Transaction} from "../Transaction";
+import {TransactionService} from "../transaction.service";
 
 @Component({
   selector: 'app-transaction-form2',
@@ -8,26 +11,27 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 })
 export class TransactionForm2Component implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  public showForm: boolean = false;
 
-  transactionForm;
+  constructor(private formBuilder: FormBuilder,
+              private transactionService: TransactionService) { }
+
+  public transactionForm: FormGroup;
+  model = new Transaction();
 
   ngOnInit() {
-
+    console.log(environment.myOwnProperty);
     this.transactionForm = this.formBuilder.group(
       {
-        name: ['', Validators.required],
+        name: ['', Validators.minLength(5)],
         type: [''],
+        date: [''],
         kind: [''],
         amount: ['']
       });
 
      this.listenerFormControlValueChanged();
 
-  }
-
-  onSubmit() {
-    console.log(this.transactionForm.value);
   }
 
   listenerFormControlValueChanged() {
@@ -43,5 +47,15 @@ export class TransactionForm2Component implements OnInit {
         this.transactionForm.get('kind').updateValueAndValidity();
       }
     );
+  }
+
+  onSubmit(): void {
+    console.log('test2');
+    this.transactionService.saveTransaction(this.transactionForm);
+
+  }
+
+  myFunc(){
+    this.showForm = !this.showForm;
   }
 }
