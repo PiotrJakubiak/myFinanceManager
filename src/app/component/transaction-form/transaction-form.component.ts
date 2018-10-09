@@ -1,33 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import {environment} from "../../environments/environment";
-import {Transaction} from "../Transaction";
-import {TransactionService} from "../transaction.service";
+import {TransactionService} from '../service/transaction.service';
+import {ChartService} from '../service/chart/chart.service';
 
 @Component({
   selector: 'app-transaction-form2',
-  templateUrl: './transaction-form2.component.html',
-  styleUrls: ['./transaction-form2.component.css']
+  templateUrl: './transaction-form.component.html',
+  styleUrls: ['./transaction-form.component.css']
 })
-export class TransactionForm2Component implements OnInit {
+export class TransactionFormComponent implements OnInit {
 
-  public showForm: boolean = false;
+  private showForm = false;
+  typeTransactionEnum = [ 'Wydatek', 'Przychod' ];
+  kindTransactionEnum = [ 'Jedzenie', 'Alkohol', 'Ubrania', 'Chemia', 'Rozrywka', 'Rachunki'];
 
   constructor(private formBuilder: FormBuilder,
-              private transactionService: TransactionService) { }
+              private transactionService: TransactionService,
+              private chartService: ChartService) { }
 
   public transactionForm: FormGroup;
-  model = new Transaction();
 
   ngOnInit() {
-    console.log(environment.myOwnProperty);
     this.transactionForm = this.formBuilder.group(
       {
         name: ['', Validators.minLength(5)],
-        type: [''],
-        date: [''],
+        type: ['', [Validators.required]],
+        date: ['', [Validators.required]],
         kind: [''],
-        amount: ['']
+        amount: ['', [Validators.required]]
       });
 
      this.listenerFormControlValueChanged();
@@ -38,8 +38,7 @@ export class TransactionForm2Component implements OnInit {
     this.transactionForm.get('type').valueChanges.subscribe
     (
       (type: string) => {
-         console.log(type);
-         if (type === 'wydatek') {
+         if (type === 'Wydatek') {
            this.transactionForm.get('kind').setValidators([Validators.required]);
          } else {
            this.transactionForm.get('kind').clearValidators();
@@ -50,12 +49,13 @@ export class TransactionForm2Component implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('test2');
     this.transactionService.saveTransaction(this.transactionForm);
-
+    this.showForm = !this.showForm;
+    this.chartService.refreshChart();
   }
 
-  myFunc(){
+  addNewTransaction() {
+    this.transactionForm.reset();
     this.showForm = !this.showForm;
   }
 }

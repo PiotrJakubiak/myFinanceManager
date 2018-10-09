@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TransactionService} from '../transaction.service';
+import {TransactionService} from '../service/transaction.service';
 import {Transaction} from '../Transaction';
 
 @Component({
@@ -9,7 +9,7 @@ import {Transaction} from '../Transaction';
 })
 export class TransactionListComponent implements OnInit {
 
-  private transactions: Transaction[];
+  public transactions: Transaction[];
   private errorMessage: '';
 
   constructor(private transactionService: TransactionService) { }

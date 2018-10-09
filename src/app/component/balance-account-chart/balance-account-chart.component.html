@@ -1,6 +1,6 @@
 <div>
   <div style="display: block" *ngIf="isReadyChart">
-    <canvas baseChart
+    <canvas baseChart #baseChart="base-chart"
             [datasets]="barChartData"
             [labels]="MONTHS"
             [options]="barChartOptions"
@@ -9,6 +9,4 @@
             (chartHover)="chartHovered($event)"
             (chartClick)="chartClicked($event)"></canvas>
   </div>
-  <<button (click)="test()">Update</button>-->
-  <label *ngFor="let transaction of transactions">{{transaction}}</label>
 </div>

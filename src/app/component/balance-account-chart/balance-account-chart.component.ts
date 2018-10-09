@@ -1,6 +1,7 @@
 import {Component, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {TransactionService} from "../transaction.service";
-import {BaseChartDirective} from "ng2-charts";
+import {TransactionService} from '../service/transaction.service';
+import {BaseChartDirective} from 'ng2-charts';
+import {ChartService} from '../service/chart.service';
 
 @Component({
   selector: 'app-balance-account-chart',
@@ -9,15 +10,21 @@ import {BaseChartDirective} from "ng2-charts";
 })
 export class BalanceAccountChartComponent implements OnInit {
 
-  const MONTHS: string[] = ['Styczeń', 'Luty', 'Marzec', 'Kwiecien', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpien', 'Wrzesien', 'Pazdziernik', 'Listopad', 'Grudzien'];
-  public barChartType: string = 'bar';
-  public barChartLegend: boolean = true;
+  @ViewChild('baseChart')
+  public chart: BaseChartDirective;
+
+  MONTHS: string[] = ['Styczeń', 'Luty', 'Marzec', 'Kwiecien', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpien', 'Wrzesien', 'Pazdziernik', 'Listopad', 'Grudzien'];
+  public barChartType = 'bar';
+  public barChartLegend = true;
   private errorMessage: '';
-  public isReadyChart: boolean = false;
+  public isReadyChart = false;
+  private refresh = false;
+  incomingBalanceData: any[];
+
 
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
     scales: {
       yAxes: [{
         ticks: {
@@ -27,21 +34,24 @@ export class BalanceAccountChartComponent implements OnInit {
       }]
     }
   };
-  @ViewChild(BaseChartDirective)
-  public chart: BaseChartDirective;
 
   public barChartData = [
     {data: [], label: 'Wydatki'},
     {data: [], label: 'Oszczednosci'}
   ];
 
-  public constructor(private transactionService: TransactionService) {
+  public constructor(private transactionService: TransactionService,
+                     private chartService: ChartService) {
     this.getMonthIncomingBalance();
     this.getMonthSpendingBalance();
     this.isReadyChart = true;
   }
 
   ngOnInit() {
+    this.chartService.refresh.subscribe(refresh => {
+      this.refresh = refresh;
+      this.refreshChartData();
+    });
   }
 
   public popualteChartDataSet(dataToPresent: any[], index: number): void {
@@ -56,12 +66,12 @@ export class BalanceAccountChartComponent implements OnInit {
     console.log(data)
     this.barChartData = clone;
   }
- public getMonthIncomingBalance(): void {
-     this.transactionService.getMonthIncomingBalance()
-       .subscribe((data) => {
+  public getMonthIncomingBalance(): void {
+    this.transactionService.getMonthIncomingBalance()
+      .subscribe((data) => { this.incomingBalanceData = data;
         this.popualteChartDataSet(data, 0);
       });
-}
+  }
   public getMonthSpendingBalance(): void {
     this.transactionService.getMonthSpendingBalance()
       .subscribe((data) => {
@@ -69,10 +79,10 @@ export class BalanceAccountChartComponent implements OnInit {
       });
   }
 
-  public test(): void {
-    console.log('test')
-    this.chart.chart.update();
-    this.chart.ngOnChanges({} as SimpleChanges);
+  public refreshChartData(): void {
+    if (this.refresh) {
+      this.getMonthIncomingBalance();
+      this.getMonthSpendingBalance();
+    }
   }
-
 }
