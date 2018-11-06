@@ -1,0 +1,29 @@
+<div class="outer_login_wrapper">
+    <div class="login_wrapper">
+
+      <form [formGroup]="loginForm" (ngSubmit)="login()" >
+        <div class="form-group input-container">
+         <!-- <label for="login">Login</label>-->
+          <i class="fa fa-user icon"></i>
+          <input type="text" id="login" name="login" class="form-control input-field" formControlName="login" placeholder="Username">
+          <app-error-message [control]="loginForm.controls['login']"></app-error-message>
+        </div>
+        <div class="form-group input-container">
+           <!-- <label>Password</label>-->
+            <i class="fa fa-key icon"></i>
+            <input type="password" id="password" name="password" class="form-control input-field" formControlName="password" placeholder="Password">
+          <app-error-message [control]="loginForm.controls['password']"></app-error-message>
+        </div>
+        <div>
+          <button id="loginButton" class="btn">Log in</button>
+        </div>
+        <div *ngIf="error">
+          Wprowadzono niepoprawne dane logowania.
+        </div>
+        <hr />
+        <div class="form-group centered">
+          <a routerLink="/register">Rejestracja</a>
+        </div>
+      </form>
+    </div>
+</div>
