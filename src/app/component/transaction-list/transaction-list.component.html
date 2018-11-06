@@ -1,3 +1,4 @@
+<app-top-menu></app-top-menu>
 <div class="container">
   <table class="table">
     <thead>
@@ -9,12 +10,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let transaction of transactions">
-        <td>{{ transaction.name }}</td>
+        <td> <a [routerLink]="['/transactions', transaction.id]"> {{ transaction.name }} </a></td>
         <td>{{ transaction.date | date: 'dd-MM-y' }}</td>
         <td>{{ transaction.type }}</td>
         <td>{{ transaction.kind }}</td>
         <td>{{ transaction.amount | customCurrency }}</td>
+        <td>{{ transaction.transactionKind.name }}</td>
       </tr>
     </tbody>
   </table>
 </div>
+<router-outlet></router-outlet>

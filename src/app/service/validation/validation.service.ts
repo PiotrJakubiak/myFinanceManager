@@ -8,7 +8,7 @@ export class ValidationService {
   static getValidationMessage(validator: string) {
     const messages = {
       'required': 'Pole wymagane',
-      'minlength': 'test'
+      'minlength': 'Wprowadzona wartość jest zbyt krótka'
     };
     return messages[validator];
   }

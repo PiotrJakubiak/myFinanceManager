@@ -1,7 +1,7 @@
 import {Component, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {TransactionService} from '../service/transaction.service';
+import {TransactionService} from '../../service/transaction.service';
 import {BaseChartDirective} from 'ng2-charts';
-import {ChartService} from '../service/chart.service';
+import {ChartService} from '../../service/chart/chart.service';
 
 @Component({
   selector: 'app-balance-account-chart',
@@ -13,12 +13,13 @@ export class BalanceAccountChartComponent implements OnInit {
   @ViewChild('baseChart')
   public chart: BaseChartDirective;
 
-  MONTHS: string[] = ['Styczeń', 'Luty', 'Marzec', 'Kwiecien', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpien', 'Wrzesien', 'Pazdziernik', 'Listopad', 'Grudzien'];
+  MONTHS = ['Styczeń', 'Luty', 'Marzec', 'Kwiecien', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpien', 'Wrzesien', 'Pazdziernik', 'Listopad', 'Grudzien'];
   public barChartType = 'bar';
   public barChartLegend = true;
   private errorMessage: '';
   public isReadyChart = false;
   private refresh = false;
+  private dataAdded = false;
   incomingBalanceData: any[];
 
 
@@ -48,8 +49,8 @@ export class BalanceAccountChartComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.chartService.refresh.subscribe(refresh => {
-      this.refresh = refresh;
+    this.transactionService.addingTransactionDone.subscribe(addingTransactionDone => {
+      this.dataAdded = addingTransactionDone;
       this.refreshChartData();
     });
   }
@@ -80,9 +81,12 @@ export class BalanceAccountChartComponent implements OnInit {
   }
 
   public refreshChartData(): void {
-    if (this.refresh) {
+    console.log('this.dataAdded=' + this.dataAdded)
+    if (this.dataAdded) {
+      console.log('refresh wykonany');
       this.getMonthIncomingBalance();
       this.getMonthSpendingBalance();
+      this.dataAdded = false;
     }
   }
 }

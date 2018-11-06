@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {TransactionService} from '../service/transaction.service';
-import {Transaction} from '../Transaction';
+import {TransactionService} from '../../service/transaction.service';
+import {Transaction} from '../../model/Transaction';
 
 @Component({
   selector: 'app-transaction-list',
@@ -16,8 +16,9 @@ export class TransactionListComponent implements OnInit {
 
   ngOnInit() {
     this.transactionService.getSubject()
-      .subscribe (
-        () => { this.getTransactions(); }
+      .subscribe(() => {
+          this.getTransactions();
+        }
       );
     this.getTransactions();
   }

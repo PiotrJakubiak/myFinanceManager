@@ -1,3 +1,4 @@
+import {TransactionKind} from './TransactionKind';
 export class Transaction {
   id: number;
   name: string;
@@ -5,6 +6,7 @@ export class Transaction {
   type: string;
   kind: string;
   amount: string;
+  transactionKind: TransactionKind;
 
   public Transaction() {
 

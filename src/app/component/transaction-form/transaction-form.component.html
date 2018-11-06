@@ -36,8 +36,14 @@
     <app-error-message [control]="transactionForm.controls['date']"></app-error-message>
   </div>
 
-  <button type="submit" [disabled]="!transactionForm.valid">ADD</button>
+  <div class="form-group" formGroupName="transactionKind">
+    <label for="transactionKind">Amount:</label>
+    <input id="transactionKind" type="text" class="form-control" formControlName="name2" />
+    <app-error-message [control]="transactionForm.controls['transactionKind']"></app-error-message>
+  </div>
 
+  <button type="submit" [disabled]="!transactionForm.valid">ADD</button>
+  {{ transactionForm.value | json }}
   <p>
     Form Status: {{ transactionForm.status }}
   </p>

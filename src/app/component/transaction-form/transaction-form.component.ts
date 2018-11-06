@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import {TransactionService} from '../service/transaction.service';
-import {ChartService} from '../service/chart/chart.service';
+import {TransactionService} from '../../service/transaction.service';
+import {ChartService} from '../../service/chart/chart.service';
 
 @Component({
   selector: 'app-transaction-form2',
@@ -27,7 +27,10 @@ export class TransactionFormComponent implements OnInit {
         type: ['', [Validators.required]],
         date: ['', [Validators.required]],
         kind: [''],
-        amount: ['', [Validators.required]]
+        amount: ['', [Validators.required]],
+        transactionKind: this.formBuilder.group({
+          name2: ['']
+        })
       });
 
      this.listenerFormControlValueChanged();
@@ -35,8 +38,7 @@ export class TransactionFormComponent implements OnInit {
   }
 
   listenerFormControlValueChanged() {
-    this.transactionForm.get('type').valueChanges.subscribe
-    (
+    this.transactionForm.get('type').valueChanges.subscribe(
       (type: string) => {
          if (type === 'Wydatek') {
            this.transactionForm.get('kind').setValidators([Validators.required]);
