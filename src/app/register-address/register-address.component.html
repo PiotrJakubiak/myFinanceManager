@@ -1,0 +1,41 @@
+
+<form *ngIf="address" [formGroup]="address">
+  <h2>Adres</h2>
+  <div class="row col-lg-6">
+      <div class="form-group" [ngClass]="{'has-error': (address.get('street')?.touched || address.get('street')?.dirty ) && !address.get('street')?.valid }">
+        <label for="street">Ulica</label>
+        <input type="text" class="form-control" id="street" formControlName="street" />
+        <app-error-message [control]="address.controls['street']"></app-error-message>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error': (address.get('city')?.touched || address.get('city')?.dirty ) && !address.get('city')?.valid }">
+        <label for="city">Miasto</label>
+        <input type="text" class="form-control" id="city" formControlName="city" />
+        <app-error-message [control]="address.controls['city']"></app-error-message>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error': (address.get('zipCode')?.touched || address.get('zipCode')?.dirty ) && !address.get('zipCode')?.valid }">
+        <label for="zipCode">Kod pocztowy</label>
+        <input type="text" class="form-control" id="zipCode" formControlName="zipCode" />
+        <app-error-message [control]="address.controls['zipCode']"></app-error-message>
+      </div>
+  </div>
+
+  <div class="row col-lg-6">
+    <div class="form-group" [ngClass]="{'has-error': (address.get('number')?.touched || address.get('number')?.dirty ) && !address.get('number')?.valid }">
+      <label for="number">Numer</label>
+      <input type="text" class="form-control" id="number" formControlName="number" />
+      <app-error-message [control]="address.controls['number']"></app-error-message>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error': (address.get('country')?.touched || address.get('country')?.dirty ) && !address.get('country')?.valid }">
+      <label for="country">Kraj</label>
+      <input type="text" class="form-control" id="country" formControlName="country" />
+      <app-error-message [control]="address.controls['country']"></app-error-message>
+    </div>
+  </div>
+  <div class="buttons col-lg-12">
+      <button class="btn btn-primary pull-left" (click)="switchToPrev('personData')">Cofnij</button>
+      <button class="btn btn-primary pull-right" [disabled]="!address.valid" (click)="test()">Dalej</button>
+  </div>
+</form>

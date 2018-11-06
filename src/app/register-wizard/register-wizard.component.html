@@ -1,0 +1,20 @@
+
+<div class="container">
+
+  <app-register-nav-steps [step]="activeStep"></app-register-nav-steps>
+
+    <div [ngSwitch]="activeStep">
+      <span *ngSwitchCase="'personData'">
+        <app-register-person-data [personData]="registerForm.controls.personData" (step)="handleActiveStep($event)"></app-register-person-data>
+      </span>
+      <span *ngSwitchCase="'addressData'">
+        <app-register-address [address]="registerForm.controls.address" (step)="handleActiveStep($event)"></app-register-address>
+      </span>
+      <span *ngSwitchCase="'confirm'">
+         <app-register-confirm [formData]="registerForm" (step)="handleActiveStep($event)"></app-register-confirm>
+      </span>
+      <span *ngSwitchCase="'finish'">
+        <app-register-finish [formData]="registerForm"></app-register-finish>
+      </span>
+    </div>
+</div>

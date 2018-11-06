@@ -1,0 +1,71 @@
+
+<form>
+  <h2>Potwierdzenie danych</h2>
+  <div [formGroup]="formData?.get('personData')" class="row col-lg-6">
+    <div class="form-group" [ngClass]="{'has-error': ( formData?.get('personData').get('firstName')?.touched || formData?.get('personData').get('firstName')?.dirty ) && !formData?.get('personData').get('firstName')?.valid }">
+      <label for="firstName">Imie</label>
+      <input type="text" class="form-control" id="firstName" formControlName="firstName" />
+    </div>
+
+    <div class="form-group" >
+      <label for="lastName">Nazwisko</label>
+      <input type="text" class="form-control" id="lastName" formControlName="lastName" />
+    </div>
+
+    <div class="form-group">
+      <label for="pesel">PESEL</label>
+      <input type="text" class="form-control" id="pesel" formControlName="pesel" />
+    </div>
+
+    <div class="form-group">
+      <label for="birthDay">Data urodzenia</label>
+      <input type="text" class="form-control" id="birthDay" formControlName="birthDay" />
+    </div>
+
+    <div formGroupName="emailGroup">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" formControlName="email" />
+      </div>
+    </div>
+  </div>
+<div class="row col-lg-12">
+  <div [formGroup]="formData?.get('address')">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label for="street">Ulica</label>
+        <input type="text" class="form-control" id="street" formControlName="street" />
+      </div>
+      <div class="form-group">
+        <label for="city">Miasto</label>
+        <input type="text" class="form-control" id="city" formControlName="city" />
+      </div>
+
+      <div class="form-group">
+        <label for="zipCode">Kod pocztowy</label>
+        <input type="text" class="form-control" id="zipCode" formControlName="zipCode" />
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label for="number">Numer</label>
+        <input type="text" class="form-control" id="number" formControlName="number" />
+      </div>
+
+      <div class="form-group">
+        <label for="country">Kraj</label>
+        <input type="text" class="form-control" id="country" formControlName="country" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="buttons col-lg-12">
+
+    <button class="btn btn-primary pull-left" (click)="switchToPrev('addressData')">Cofnij</button>
+    <button class="btn btn-primary pull-right" (click)="test()">Zakoncz</button>
+  </div>
+
+</form>
+

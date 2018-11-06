@@ -1,0 +1,61 @@
+
+<form [formGroup]="personData">
+  <h2>Dane osobowe</h2>
+  <div class="row col-lg-6">
+    <div class="form-group" [ngClass]="{'has-error': (personData.get('firstName')?.touched || personData.get('firstName')?.dirty ) && !personData.get('firstName')?.valid }">
+      <label for="firstName">Imie</label>
+      <input type="text" class="form-control" id="firstName" formControlName="firstName" />
+      <div *ngIf="true === (personData.get('firstName')?.touched || personData.get('firstName')?.dirty ) && !personData.get('firstName')?.valid">
+         <app-error-message [control]="personData?.controls['firstName']"></app-error-message>
+      </div>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error': ( personData.get('lastName')?.touched || personData.get('lastName')?.dirty ) && !personData.get('lastName')?.valid }">
+      <label for="lastName">Nazwisko</label>
+      <input type="text" class="form-control" id="lastName" formControlName="lastName" />
+      <div *ngIf="true === (personData.get('lastName')?.touched || personData.get('lastName')?.dirty ) && !personData.get('lastName')?.valid">
+        <app-error-message [control]="personData?.controls['lastName']"></app-error-message>
+      </div>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error': ( personData.get('pesel')?.touched || personData.get('pesel')?.dirty ) && !personData.get('pesel')?.valid }">
+      <label for="pesel">PESEL</label>
+      <input type="text" class="form-control" id="pesel" formControlName="pesel" />
+      <div *ngIf="true === (personData.get('pesel')?.touched || personData.get('pesel')?.dirty ) && !personData.get('pesel')?.valid">
+        <app-error-message [control]="personData?.controls['pesel']"></app-error-message>
+      </div>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error': ( personData.get('birthDay')?.touched || personData.get('birthDay')?.dirty ) && !personData.get('birthDay')?.valid }">
+      <label for="birthDay">Data urodzenia</label>
+      <input type="text" class="form-control" id="birthDay" formControlName="birthDay" />
+      <div *ngIf="true === (personData.get('birthDay')?.touched || personData.get('birthDay')?.dirty ) && !personData.get('birthDay')?.valid">
+        <app-error-message [control]="personData?.controls['birthDay']"></app-error-message>
+      </div>
+    </div>
+
+    <div formGroupName="emailGroup" [ngClass]="{'has-error': personData.get('emailGroup').errors}">
+      <div class="form-group" [ngClass]="{'has-error': ( personData.get('email')?.touched || personData.get('email')?.dirty ) && !personData.get('email')?.valid }">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" formControlName="email" />
+        <div *ngIf="true === (personData.get('email')?.touched || personData.get('email')?.dirty ) && !personData.get('email')?.valid">
+          <app-error-message [control]="personData?.controls['email']"></app-error-message>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error': ( personData.get('confirmEmail')?.touched || personData.get('confirmEmail')?.dirty ) && !personData.get('confirmEmail')?.valid }">
+        <label for="confirmEmail">Powtorz Email</label>
+        <input type="text" class="form-control" id="confirmEmail" formControlName="confirmEmail" />
+        <div *ngIf="true === (personData.get('confirmEmail')?.touched || personData.get('confirmEmail')?.dirty ) && !personData.get('confirmEmail')?.valid">
+           <app-error-message [control]="personData?.controls['confirmEmail']"></app-error-message>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="buttons col-lg-12">
+        <hr/>
+        <button class="btn btn-primary pull-right" type="submit" [disabled]="!personData.valid"  (click)="test()" >Dalej</button>
+    </div>
+
+</form>
+
